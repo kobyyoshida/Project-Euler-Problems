@@ -1,4 +1,6 @@
-nums = """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+high_product = 0
+nums = """
+08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
@@ -19,5 +21,52 @@ nums = """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48"""
 
+nums = nums.split()
+
+def check_horizontals(nums):
+    #print("HIGH PRODUCT: ", high_product)
+    global high_product
+    for i in range(3,len(nums)):
+        print("HORIZONTAL: ",int(nums[i]),int(nums[i-1]),int(nums[i-2]),int(nums[i-3]))
+        if int(nums[i])*int(nums[i-1])*int(nums[i-2])*int(nums[i-3]) > high_product:
+            #print(int(nums[i])*int(nums[i+1])*int(nums[i+2])*int(nums[i+3]))
+            high_product = int(nums[i])*int(nums[i-1])*int(nums[i-2])*int(nums[i-3])
+            print("UPDATED HIGH PRODUCT: ", high_product)
+
 def check_verticals(nums):
-    for num in range(0,len(nums),20)
+    global high_product
+    for i in range(60,len(nums)):
+        print("VERTICAL: ",int(nums[i]),int(nums[i-20]),int(nums[i-40]),int(nums[i-60]))
+        if int(nums[i])*int(nums[i-20])*int(nums[i-40])*int(nums[i-60]) > high_product:
+            #print(int(nums[i])*int(nums[i+20])*int(nums[i+40])*int(nums[i+60]))
+            high_product = int(nums[i])*int(nums[i-20])*int(nums[i-40])*int(nums[i-60])
+            print("UPDATED HIGH PRODUCT: ", high_product)
+
+def check_downward_diagonals(nums):
+    global high_product
+    for i in range(63,len(nums)):
+        print("DIAGONAL: ",int(nums[i]),int(nums[i-21]),int(nums[i-42]),int(nums[i-63]))
+        #if((i-63)%19 == 0 or (i-63)%18 == 0 or (i-63)%17 == 0):
+        #    print("SKIPPED DIAGONAL")
+            
+        if int(nums[i])*int(nums[i-21])*int(nums[i-42])*int(nums[i-63]) > high_product:
+            high_product = int(nums[i])*int(nums[i-21])*int(nums[i-42])*int(nums[i-63])
+            print("UPDATED HIGH PRODUCT: ", high_product)
+
+
+
+def check_upward_diagonals(nums):
+    global high_product
+    for i in range(80,len(nums)):
+        print("UPWARD DIAGONAL: ",int(nums[i]),int(nums[i-19]),int(nums[i-38]),int(nums[i-57]))
+          
+        if int(nums[i])*int(nums[i-19])*int(nums[i-38])*int(nums[i-57]) > high_product:
+            high_product = int(nums[i])*int(nums[i-19])*int(nums[i-38])*int(nums[i-57])
+            print("UPDATED HIGH PRODUCT: ", high_product)
+            
+
+check_horizontals(nums)
+check_verticals(nums)
+check_downward_diagonals(nums)
+check_upward_diagonals(nums)
+print("HIGH PRODUCT: ",high_product)
