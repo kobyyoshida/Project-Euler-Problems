@@ -1,3 +1,4 @@
+#Unfinished
 neighbors = []
 prev_index = 1
 nums = """75
@@ -16,27 +17,20 @@ nums = """75
 63 66 04 68 89 53 67 30 73 16 69 87 40 31
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
 
+
 nums = nums.split("\n")
-print("NUMS: ",nums)
-#Convert to list of lists
+#Convert to list of lists in correct format
 for i in range(len(nums)):
     nums[i] = list(nums[i].split(" "))
-    print("nums[i] on conversion: ",nums[i])
-    
-
-
+    nums[i] = [int(j) for j in nums[i]]
 
 #Hard code the first two numbers because its the only one that doesnt fit the pattern
-
 neighbors.append(int(nums[0][0]))
 neighbors.append(int(nums[1][0]))
 
 for i in range(2,15):
-    print(nums[i])
     neighbors.append(max(int(nums[i][prev_index-1]),int(nums[i][prev_index+1])))
     prev_index = nums[i].index(max(int(nums[i][prev_index-1]),int(nums[i][prev_index+1])))
-    print("PREV INDEX: ",prev_index)
-    print("i:",i)
     #neighbors.append(int(nums[i][i-1]))
 
 print("NEIGHBORS: ",neighbors)
